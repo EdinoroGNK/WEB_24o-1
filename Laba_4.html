@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вышивка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e6f4f0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #1a3a32;
+            scroll-behavior: smooth;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(235, 248, 242, 0.96);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 12px rgba(38, 77, 65, 0.08);
+            z-index: 1000;
+            padding: 14px 0;
+            border-bottom: 1px solid #bcd9cf;
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c6e5c;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            font-size: 1.05rem;
+            transition: border-bottom-color 0.2s;
+        }
+
+        .nav a:hover {
+            border-bottom-color: #3fa392;
+        }
+
+        main {
+            margin-top: 85px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: #ffffffec;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(52, 94, 81, 0.05);
+            scroll-margin-top: 90px;
+            border: 1px solid #cde4db;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2a7f6b;
+            border-left: 6px solid #5fbcab;
+            padding-left: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.7rem 0;
+            color: #348e7a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem 0 2rem;
+            color: #548e7d;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #cde4db;
+        }
+
+        .techniques-flex {
+            background: #ffffffec;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #cde4db;
+            scroll-margin-top: 90px;
+        }
+
+        .flex-techniques-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 1.2rem;
+        }
+
+        .tech-card {
+            flex: 1 1 280px;
+            background: #f5fbf9;
+            border-radius: 24px;
+            padding: 1.2rem;
+            border: 1px solid #cde0d9;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(47, 130, 110, 0.15);
+        }
+
+        .tech-card h4 {
+            color: #2a7f6b;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-left: 3px solid #5fbcab;
+            padding-left: 10px;
+        }
+
+        .tech-card p {
+            font-size: 0.92rem;
+            line-height: 1.4;
+            color: #2d5a4e;
+            margin-bottom: 12px;
+        }
+
+        .materials-grid {
+            background: #ffffffec;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #cde4db;
+            scroll-margin-top: 90px;
+        }
+
+        .grid-materials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0 1.5rem 0;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .grid-materials-list li {
+            background: #f5fbf9;
+            padding: 8px 14px;
+            border-radius: 40px;
+            text-align: center;
+            border: 1px solid #cde0d9;
+            font-weight: 500;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .grid-materials-list li:hover {
+            transform: translateX(5px);
+            background: #e0f0ea;
+        }
+
+        .schemes-table-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fefffd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #cfe3db;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #daf1ea;
+            color: #215f50;
+        }
+
+        @media (max-width: 900px) {
+            .tech-card {
+                flex: 1 1 240px;
+            }
+            .tech-card h4 {
+                font-size: 1rem;
+            }
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .grid-materials-list {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .grid-materials-list li {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+            .nav ul {
+                gap: 1rem;
+            }
+            .nav a {
+                font-size: 0.9rem;
+            }
+            .section, .techniques-flex, .materials-grid {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .review-item {
+                padding: 0.8rem;
+            }
+            .nav ul {
+                gap: 0.7rem;
+            }
+            .nav a {
+                font-size: 0.75rem;
+            }
+            main {
+                margin-top: 70px;
+            }
+            .section h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#materials-grid">Материалы и Схемы</a></li>
+        <li><a href="#techniques-flex">Техники</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="container">
+        <section id="home" class="section">
+            <h2>🪡 Вышивка</h2>
+            <img class="main-img" src="https://i.pinimg.com/originals/60/c8/0b/60c80b52aba65b9168224635cae17afb.jpg?nii=t" width="400" height="300" alt="вышивка">
+            <p>Вышивка — это вид декоративно-прикладного искусства, в котором рисунок или узор создается с помощью иглы и нитей на ткани. Помимо эстетического удовольствия она приносит огромную пользу: ритмичные движения иглы успокаивают нервную систему, работая как медитация и снимая стресс, при этом развивается мелкая моторика и сохраняется ясность ума, а также тренируются терпение, внимательность и усидчивость.</p>
+            <p style="margin-top: 14px;"><a href="https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D1%88%D0%B8%D0%B2%D0%BA%D0%B0_%D0%BA%D1%80%D0%B5%D1%81%D1%82%D0%B8%D0%BA%D0%BE%D0%BC" target="_blank" style="color: #318672;">📖 Узнать историю вышивки →</a></p>
+        </section>
+
+        <section id="materials-grid" class="materials-grid">
+            <h2>📘 Материалы и Схемы</h2>
+            
+            <h3>Что нужно для вышивки:</h3>
+            <ul class="grid-materials-list">
+                <li>🧵 Канва «Аида»</li>
+                <li>🪡 Нитки мулине</li>
+                <li>⭕ Пяльцы или рамка</li>
+                <li>🪡 Игла с тупым концом</li>
+                <li>✂️ Ножницы, маркер</li>
+            </ul>
+
+            <h3>Таблица схем</h3>
+            <div class="schemes-table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Название схемы</th><th>Сложность</th><th>Картинка</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ваза цветов</td><td>Тяжёлая</td><td><img src="https://i.pinimg.com/736x/1b/e8/d0/1be8d00e17a2bf58fc645b5c98f15874.jpg" width="400" height="400" alt="схема"></td></tr>
+                        <tr><td>Лисёнок</td><td>Лёгкая</td><td><img src="https://i.pinimg.com/736x/f4/53/cb/f453cb3ea5c7e4022f9512d4201353d7.jpg" width="400" height="300" alt="схема"></td></tr>
+                        <tr><td>Природа</td><td>Средняя</td><td><img src="https://i.pinimg.com/originals/81/d2/71/81d271b447c19b6449f77947ed213f0a.jpg" width="400" height="300" alt="схема"></td></tr>
+                        <tr><td>Аниме</td><td>Средняя</td><td><img src="https://i.pinimg.com/originals/2a/cc/fd/2accfd6c7b40f6c0fffc5d7fa2657674.jpg" width="400" height="300" alt="схема"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="techniques-flex" class="techniques-flex">
+            <h2>🪡 Техники вышивки</h2>
+            <div class="flex-techniques-list">
+                <div class="tech-card">
+                    <h4>✦ Крестик (полный крест)</h4>
+                    <p>Самая распространенная техника. Стежок состоит из двух перекрещенных диагональных нитей (сначала шьете \, затем поверх /). Верхний стежок должен всегда лежать в одну сторону для аккуратного вида.</p>
+                    <img src="https://www.diyideas.ru/upload/000/u4/7/4/krasota-01-images-big.png" width="400" height="300" alt="крестик">
+                </div>
+
+                <div class="tech-card">
+                    <h4>✦ Полукрест</h4>
+                    <p>Диагональный стежок (только одна половинка креста: \ или /). Используется для экономии времени при зашивке больших фонов или для создания эффекта легкости.</p>
+                    <img src="https://i.pinimg.com/736x/e5/bb/2b/e5bb2bac6dc0cff3a3de8638f4dcd421.jpg" width="400" height="300" alt="полукрест">
+                </div>
+
+                <div class="tech-card">
+                    <h4>✦ Назад иголку (бэкстич)</h4>
+                    <p>Шов «иголка назад» для обводки контуров, создания надписей и мелких деталей. Делает рисунок четким и завершенным. Выполняется после всех крестов.</p>
+                    <img src="https://i.pinimg.com/736x/8d/84/ce/8d84ced78f6dcb66c380bd80a823cf75.jpg" width="400" height="300" alt="бэкстич">
+                </div>
+
+                <div class="tech-card">
+                    <h4>✦ Болгарский крестик</h4>
+                    <p>Сложный крест-звездочка. Сначала шьется прямой крест (+), затем поверх него — диагональный (X). Дает плотный, выпуклый узор для ковров, подушек, скатертей.</p>
+                    <img src="https://i.pinimg.com/736x/fb/13/4f/fb134f8a5978fbec7bd0c8888e511670.jpg" width="400" height="300" alt="болгарский крестик">
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="section">
+            <h2>✨ Отзывы</h2>
+            <div class="reviews-list">
+                <div class="review-item" style="background: white; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #cde4db;">
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 8px;">
+                        <span style="font-weight: 700; color: #2a7f6b;">Екатерина</span>
+                        <span style="background: #e0f0ea; padding: 2px 12px; border-radius: 30px; font-size: 0.75rem;">Средний</span>
+                    </div>
+                    <div style="color: #f5b042; font-size: 0.9rem; letter-spacing: 2px;">★★★★☆</div>
+                    <p>Вышивка успокаивает, люблю наборы с животными.</p>
+                </div>
+                <div class="review-item" style="background: white; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #cde4db;">
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 8px;">
+                        <span style="font-weight: 700; color: #2a7f6b;">Андрей</span>
+                        <span style="background: #e0f0ea; padding: 2px 12px; border-radius: 30px; font-size: 0.75rem;">Новичок</span>
+                    </div>
+                    <div style="color: #f5b042; font-size: 0.9rem; letter-spacing: 2px;">★★★★★</div>
+                    <p>Недавно начал, уже закончил маленькую открытку.</p>
+                </div>
+                <div class="review-item" style="background: white; border-radius: 20px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #cde4db;">
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 8px;">
+                        <span style="font-weight: 700; color: #2a7f6b;">Мария</span>
+                        <span style="background: #e0f0ea; padding: 2px 12px; border-radius: 30px; font-size: 0.75rem;">Мастер</span>
+                    </div>
+                    <div style="color: #f5b042; font-size: 0.9rem; letter-spacing: 2px;">★★★★★</div>
+                    <p>Вышиваю более 10 лет, отличный антистресс!</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>❤️ Творите с удовольствием ❤️</p>
+        </footer>
+    </div>
+</main>
+</body>
+</html>
